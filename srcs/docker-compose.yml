@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   mariadb:
     container_name: mariadb
@@ -50,20 +48,6 @@ services:
 volumes:
   wordpress_data:
   mariadb_data:
-  #wordpress:
-  #  driver: local
-  #  driver_opts:
-  #    type: 'none'
-  #    o: 'bind'
-  #    device: '/home/osboxes/Documents/data/wordpress'
-
-  #mariadb:
-  #  driver: local
-  #  driver_opts:
-  #    type: 'none'
-  #    o: 'bind'
-      #device: '/home/hclaude/Documents/data/mariadb'
-
 
 networks:
   inception:

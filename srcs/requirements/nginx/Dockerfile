@@ -11,7 +11,7 @@ RUN	apt update && \
 	apt clean && \
 	mkdir -p /var/www/html && \
 	mkdir -p /var/run/nginx && \
-	chmod 755 /var/run/nginx
+	chmod 755 /var/run/nginx 
 
 RUN	chmod 755 /var/www/html && \
 	chown -R www-data:www-data /var/www/html
