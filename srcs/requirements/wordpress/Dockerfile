@@ -21,7 +21,6 @@
     RUN mkdir -p /run/php && chown -R www-data:www-data /run/php
     RUN mkdir -p /var/www/html
 
-    # Téléchargez et installez WP-CLI correctement
     RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
     RUN chmod +x /usr/local/bin/wp
     RUN sed -i 's/^listen = .*/listen = 9000/' /etc/php/7.3/fpm/pool.d/www.conf
@@ -31,12 +30,15 @@
 
     RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-    COPY conf/php.ini /etc/php/7.3/cli/
+    #COPY conf/php.ini /etc/php/7.3/cli/
 
     RUN chmod +x /usr/local/bin/wait-for-it.sh
     RUN chmod +x /usr/local/bin/init-wordpress.sh
 
+    #COPY conf/wp-config.php /var/www/html/wp-config.php
+
+    #RUN chmod 755 /var/www/html/wp-config.php
+
     EXPOSE 9000
 
     CMD ["/usr/local/bin/init-wordpress.sh"]
-    #CMD ["php-fpm7.3", "-F"]
