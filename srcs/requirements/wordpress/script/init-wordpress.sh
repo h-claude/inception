@@ -1,11 +1,9 @@
 #!/bin/bash
 
-# Attendre que MariaDB soit prêt
 /usr/local/bin/wait-for-it.sh mariadb:3306 --timeout=30 --strict -- echo "MariaDB is up!"
 
 sleep 10
 
-# Créer wp-config.php
 if [ ! -f /var/www/html/wp-config.php ]; then
     cat > /var/www/html/wp-config.php <<EOL
 <?php
@@ -36,14 +34,13 @@ wp core install \
         --admin_email=$WP_EMAIL \
         --path=/var/www/html
 
-wp user create user1 user1@example.com --role=editor --user_pass=user1_password --allow-root --path=/var/www/html
+wp user create $WP_SECOND_USER $WP_SECOND_EMAIL --role=editor --user_pass=$WP_SECOND_PASSWORD --allow-root --path=/var/www/html
 
 wp theme install twentytwentyfour --activate --path=/var/www/html --allow-root
 
 echo "wp-config.php created!"
 fi
 
-
 echo "wordpress is up!"
-# Démarrer PHP-FPM
+
 php-fpm7.3 -F
