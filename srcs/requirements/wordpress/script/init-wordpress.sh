@@ -3,6 +3,8 @@
 # Attendre que MariaDB soit prêt
 /usr/local/bin/wait-for-it.sh mariadb:3306 --timeout=30 --strict -- echo "MariaDB is up!"
 
+sleep 10
+
 # Créer wp-config.php
 if [ ! -f /var/www/html/wp-config.php ]; then
     cat > /var/www/html/wp-config.php <<EOL
@@ -13,11 +15,6 @@ define('DB_PASSWORD', '${SQL_PASSWORD}');
 define('DB_HOST', 'mariadb:3306');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
-/**define('TITLE', 'INCEPTION');*/
-/**define('ADMIN_USER', 'Daniel');*/
-/**define('ADMIN_PASSWORD', 'vivelecafe');*/
-/**#define('ADMIN_EMAIL', '');*/
-/**define('WP_DEBUG', false);*/
 
 $(curl -s https://api.wordpress.org/secret-key/1.1/salt/)
 
@@ -38,7 +35,9 @@ wp core install \
         --admin_password=$WP_PASSWORD \
         --admin_email=$WP_EMAIL \
         --path=/var/www/html
+
 wp user create user1 user1@example.com --role=editor --user_pass=user1_password --allow-root --path=/var/www/html
+
 wp theme install twentytwentyfour --activate --path=/var/www/html --allow-root
 
 echo "wp-config.php created!"
