@@ -7,7 +7,7 @@ NC=\033[0m
 all : setup build start
 
 setup :
-	@echo -e "$(DARK_BLUE)Setting up the environment...$(NC)"
+	@echo "$(DARK_BLUE)Setting up the environment...$(NC)"
 	@sudo mkdir -p /home/hclaude/data/wordpress
 	@sudo mkdir -p /home/hclaude/data/mariadb
 	@sudo resolvectl flush-caches
