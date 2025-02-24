@@ -2,7 +2,6 @@
 
 service mysql start
 
-# Attendre que le service MySQL soit prêt
 while ! mysqladmin ping --silent; do
     sleep 1
 done
