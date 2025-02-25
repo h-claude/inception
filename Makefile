@@ -19,24 +19,24 @@ setup :
 
 build :
 	@echo "$(DARK_BLUE)Building the containers...$(NC)"
-	@sudo docker-compose -f srcs/docker-compose.yml build
+	@docker-compose -f srcs/docker-compose.yml build
 	@echo "✅$(DARK_BLUE)Containers built.$(NC)✅"
 
 start :
 	@echo "$(GREEN)Starting the containers...$(NC)"
-	@sudo docker-compose -f srcs/docker-compose.yml up -d
+	@docker-compose -f srcs/docker-compose.yml up -d
 	@echo "✅$(GREEN)Containers started.$(NC)✅"
 
 stop :
 	@echo "$(YELLOW)Stopping the containers...$(NC)"
-	@sudo docker-compose -f srcs/docker-compose.yml down
+	@docker-compose -f srcs/docker-compose.yml down
 	@echo "🛑$(YELLOW)Containers stopped.$(NC)🛑"
 
 fclean :
 	@echo "$(RED)Removing the containers...$(NC)"
-	@sudo docker-compose -f srcs/docker-compose.yml kill
-	@sudo docker-compose -f srcs/docker-compose.yml rm -f
-	@sudo docker system prune -a --volumes -f
+	@docker-compose -f srcs/docker-compose.yml kill
+	@docker-compose -f srcs/docker-compose.yml rm -f
+	@docker system prune -a --volumes -f
 	@sudo rm -rf $(DATA_VOLUME)
 	@sudo resolvectl flush-caches
 	@echo "✅$(RED)Containers removed.$(NC)✅"

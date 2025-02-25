@@ -1,7 +1,5 @@
 #!/bin/bash
 
-/usr/local/bin/wait-for-it.sh mariadb:3306 --timeout=30 --strict -- echo "MariaDB is up!"
-
 sleep 10
 
 if [ ! -f /var/www/html/wp-config.php ]; then

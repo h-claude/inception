@@ -1,6 +1,5 @@
 FROM debian:buster
 
-COPY script/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 COPY script/init-wordpress.sh /usr/local/bin/init-wordpress.sh
 
 RUN apt update -y
@@ -29,10 +28,7 @@ RUN wp core download --allow-root --path=/var/www/html
 
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-
-RUN chmod +x /usr/local/bin/wait-for-it.sh
 RUN chmod +x /usr/local/bin/init-wordpress.sh
-
 
 EXPOSE 9000
 
