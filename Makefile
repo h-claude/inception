@@ -12,17 +12,17 @@ all : setup build start
 
 setup :
 	@echo "$(DARK_BLUE)Setting up the environment...$(NC)"
-	@sudo mkdir -p $(WORDPRESS_VOLUME)
-	@sudo mkdir -p $(MARIADB_VOLUME)
-	@sudo resolvectl flush-caches
+	@mkdir -p $(WORDPRESS_VOLUME)
+	@mkdir -p $(MARIADB_VOLUME)
+	@resolvectl flush-caches
 	@echo "✅$(DARK_BLUE)Environment setup complete.$(NC)✅"
 
-build :
+build : setup
 	@echo "$(DARK_BLUE)Building the containers...$(NC)"
 	@docker-compose -f srcs/docker-compose.yml build
 	@echo "✅$(DARK_BLUE)Containers built.$(NC)✅"
 
-start :
+start : build
 	@echo "$(GREEN)Starting the containers...$(NC)"
 	@docker-compose -f srcs/docker-compose.yml up -d
 	@echo "✅$(GREEN)Containers started.$(NC)✅"
@@ -37,6 +37,6 @@ fclean :
 	@docker-compose -f srcs/docker-compose.yml kill
 	@docker-compose -f srcs/docker-compose.yml rm -f
 	@docker system prune -a --volumes -f
-	@sudo rm -rf $(DATA_VOLUME)
-	@sudo resolvectl flush-caches
+	@rm -rf $(DATA_VOLUME)
+	@resolvectl flush-caches
 	@echo "✅$(RED)Containers removed.$(NC)✅"
