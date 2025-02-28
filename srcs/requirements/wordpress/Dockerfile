@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 COPY script/init-wordpress.sh /usr/local/bin/init-wordpress.sh
 
