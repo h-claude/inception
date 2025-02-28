@@ -22,7 +22,7 @@ build : setup
 	@docker-compose -f srcs/docker-compose.yml build
 	@echo "✅$(DARK_BLUE)Containers built.$(NC)✅"
 
-start : build
+start :
 	@echo "$(GREEN)Starting the containers...$(NC)"
 	@docker-compose -f srcs/docker-compose.yml up -d
 	@echo "✅$(GREEN)Containers started.$(NC)✅"

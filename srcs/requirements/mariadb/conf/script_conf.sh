@@ -1,6 +1,6 @@
 #!/bin/bash
 
-service mysql start
+service mariadb start
 
 while ! mysqladmin ping --silent; do
     sleep 1
@@ -13,4 +13,4 @@ mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
 mysql -e "FLUSH PRIVILEGES;"
 mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
 
-exec mysqld
+exec mysqld_safe
